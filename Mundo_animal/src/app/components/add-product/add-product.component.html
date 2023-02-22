@@ -1,0 +1,55 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  {{operacion}} Producto
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{operacion}} Producto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form [formGroup]="products" (ngSubmit)="onSubmit()">
+              <div class="form-floating mb-3 mt-3">
+                  <input formControlName="name"  type="text" class="form-control" placeholder="Ingrese Nombre">
+                  <label>Nombre Producto</label>
+                  <span *ngIf="products.get('name')?.hasError('required') && products.get('name')?.touched">
+                      El campo nombre es <strong>requerido</strong>
+                  </span>
+              </div>
+              <div class="form-floating mb-3 mt-3">
+                  <input formControlName="description" type="text" class="form-control" placeholder="Ingrese la descripcion">
+                  <label>Descripcion</label>
+                  <span *ngIf="products.get('name')?.hasError('required') && products.get('name')?.touched">
+                      El campo Descripcion es <strong>requerido</strong>
+                  </span>
+              </div>
+              <div class="form-floating mb-3 mt-3">
+                  <input formControlName="price" type="number" class="form-control" placeholder="Ingrese el precio">
+                  <label>Precio</label>
+                  <span *ngIf="products.get('name')?.hasError('required') && products.get('name')?.touched">
+                      El campo precio es <strong>requerido</strong>
+                  </span>
+              </div>
+              <div class="form-floating mb-3 mt-3">
+                  <input formControlName="stock" type="number" class="form-control" placeholder="Ingrese la cantidad">
+                  <label>Stock</label>
+                  <span *ngIf="products.get('name')?.hasError('required') && products.get('name')?.touched">
+                      El campo Descripcion es <strong>requerido</strong>
+                  </span>
+              </div>
+              <div class="form-floating mb-3 mt-3"  >
+                  <input type="file" (change)="onFileSelected($event)"  class="form-control">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Volver</button>
+                <button [disabled]="products.invalid" type="submit" class="btn btn-primary">Aceptar</button>
+              </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
