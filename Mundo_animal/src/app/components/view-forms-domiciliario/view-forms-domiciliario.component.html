@@ -1,0 +1,37 @@
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <h2>Panel de Administración</h2>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="/create-users">Agregar Nuevo Usuario</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-9">
+        <h2>Contactos </h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombres</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Hoja de Vida</th>
+
+              <th scope="col">Eliminar Formulario</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let form of forms">
+              <th scope="row">{{form.id}}</th>
+              <td>{{form.name}}</td>
+              <td>{{form.last_name}}</td>
+              <td> <a [href]="form.hoja_vida">Ver Hoja De vida</a> </td>
+              <td><i class="fas fa-trash" (click)="deleteForm(form.id!)" style="color: rgb(255, 105, 105); margin-left: 40px;"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

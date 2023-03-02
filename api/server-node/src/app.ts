@@ -11,5 +11,5 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api", routes);
 
 app.listen(3000, () => {
-  console.log("Server started on port 3000");
+  console.log("Api corriendo en el puerto  3000");
 });

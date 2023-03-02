@@ -5,11 +5,11 @@
     <h3>Registro de Usuarios</h3>
     <div class="cotainer">
         <div class="form-floating mb-3 mt-3">
-            <input type="text" [(ngModel)]="username" class="form-control" placeholder="Email">
+            <input type="text" [(ngModel)]="name" class="form-control" placeholder="Email">
             <label>Nombres</label>
         </div>
         <div class="form-floating mb-3 mt-3 ">
-            <input type="text"  class="form-control" placeholder="Ingrese usuario" style="margin-left: 20px;">
+            <input type="text" [(ngModel)]="last_name"  class="form-control" placeholder="Ingrese usuario" style="margin-left: 20px;">
             <label style="margin-left: 20px;">Apellidos</label>
         </div>
     </div>
@@ -19,17 +19,17 @@
             <label>Usuario</label>
         </div>
         <div class="form-floating mb-3 mt-3">
-            <input type="email" [(ngModel)]="username" class="form-control" placeholder="Ingrese usuario" style="margin-left: 20px;">
+            <input type="email" [(ngModel)]="email" class="form-control" placeholder="Ingrese usuario" style="margin-left: 20px;">
             <label style="margin-left: 20px;">Email</label>
         </div>
     </div>
     <div class="cotainer">
         <div class="form-floating mb-3 mt-3">
-            <input type="text" [(ngModel)]="username" class="form-control" placeholder="Ingrese usuario" >
+            <input type="text" [(ngModel)]="address" class="form-control" placeholder="Ingrese usuario" >
             <label>Direccion</label>
         </div>
         <div class="form-floating mb-3 mt-3">
-            <input type="tel" [(ngModel)]="username" class="form-control" placeholder="Ingrese usuario" style="margin-left: 20px;">
+            <input type="tel" [(ngModel)]="phone" class="form-control" placeholder="Ingrese usuario" style="margin-left: 20px;">
             <label style="margin-left: 20px;">Numero Telefonico </label>
         </div>
     </div>
@@ -38,11 +38,11 @@
         <label>Contraseña</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="password" [(ngModel)]="password" class="form-control" placeholder="Ingrese password">
+        <input type="password" [(ngModel)]="confirmPassword" class="form-control" placeholder="Ingrese password">
         <label>Confirmar Contraseña</label>
     </div>
     <div class="d-grid gap-2 mb-3">
-        <button type="button" class="btn btn-outline-info">Aceptar</button>
+        <button type="button" (click)="addUser()" class="btn btn-outline-info">Aceptar</button>
     </div>
     <div class="d-grid gap-2 mb-3">
         <a routerLink="/" class="text-primary">Volver</a>

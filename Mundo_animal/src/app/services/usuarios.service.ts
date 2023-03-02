@@ -11,16 +11,16 @@ export class UserService {
   private myApiUrl: string;
 
   constructor(private http: HttpClient) {
-    this.myAppUrl = 'http://localhost:3000/';
-    this.myApiUrl = 'api/users/';
+    this.myAppUrl = 'http://localhost:3000/api';
+    this.myApiUrl = 'api/create-users/';
   }
 
   signIn(user: User): Observable<any> {
-    return this.http.post(`${this.myAppUrl}${this.myApiUrl}/register`, user);
+    return this.http.post(`${this.myAppUrl}/create-users`, user);
   }
   login(user: User): Observable<string> {
     return this.http.post<string>(
-      `${this.myAppUrl}${this.myApiUrl}/login`,
+      `${this.myAppUrl}/login`,
       user
     );
   }

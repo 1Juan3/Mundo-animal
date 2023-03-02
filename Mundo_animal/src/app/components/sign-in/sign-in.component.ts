@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/interfaces/usuario';
+import { Client } from 'src/app/interfaces/client';
 import { ErrorService } from 'src/app/services/error-service.service';
 import { UserService } from 'src/app/services/usuarios.service';
 @Component({
@@ -11,22 +11,18 @@ import { UserService } from 'src/app/services/usuarios.service';
   styleUrls: ['./sign-in.component.css'],
 })
 export class SignInComponent implements OnInit {
-  opcionSeleccionado: string = '0';
-  verSeleccion: string = '';
-  roles: string[] = [
-    'Veterinaria(empresa)',
-    'Veterinario(persona)',
-    'Domiciliario',
-  ];
+;
+  name: string ='';
+  last_name :string= '';
+  rol:string= "cliente";
+  address: string='';
+  phone:string='';
+  email:string='';
   username: string = '';
   password: string = '';
   confirmPassword: string = '';
   loading: boolean = false;
 
-  capturar() {
-    // Pasamos el valor seleccionado a la variable verSeleccion
-    this.verSeleccion = this.opcionSeleccionado;
-  }
   constructor(
     private toastr: ToastrService,
     private _userService: UserService,
@@ -36,9 +32,14 @@ export class SignInComponent implements OnInit {
   addUser() {
     // Validamos que el usuario ingrese valores
     if (
+      this.name ==''||
+      this.last_name ==''||
+      this.address==''||
+      this.phone==''||
+      this.email==''||
       this.username == '' ||
       this.password == '' ||
-      this.confirmPassword == ''
+      this.confirmPassword == '' 
     ) {
       this.toastr.error('Todos los campos son obligatorios', 'Error');
       return;
@@ -51,18 +52,23 @@ export class SignInComponent implements OnInit {
     }
 
     // Creamos el objeto
-    const user: User = {
+    const client: Client = {
+      name :this.name,
+      last_name: this.last_name,
+      rol:this.rol,
+      address:this.address,
+      phone: this.phone,
+      email:this.email,
       username: this.username,
-      rol: this.verSeleccion,
       password: this.password,
     };
 
     this.loading = true;
-    this._userService.signIn(user).subscribe({
+    this._userService.signIn(client).subscribe({
       next: (v) => {
         this.loading = false;
         this.toastr.success(
-          `El usuario ${this.username} fue registrado con exito con el rol de ${this.verSeleccion}`,
+          `El usuario ${this.username} fue registrado con exito con el rol de ${this.rol}`,
           'Usuario registrado'
         );
         this.router.navigate(['/login']);

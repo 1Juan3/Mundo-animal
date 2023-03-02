@@ -1,0 +1,26 @@
+
+
+<div class="encabezado">
+    <div class="parte1">
+        <img src="../../../assets/img/mundo animal.png" alt="logo">
+        <h3>Formulario Veterinaria (Empresa)</h3>
+</div>
+<div class="cotainer">
+        <form [formGroup]="form" (ngSubmit)="sendForm(form.value)">
+        <div class="form-floating mb-3 mt-3">
+            <input formControlName="email" type="email" class="form-control" placeholder="Email">
+            <label>Correo Electronico</label>
+        </div>
+        <div class="form-floating mb-3 mt-3 ">
+            <input formControlName="razon_social" type="text"  class="form-control" placeholder="Razon Social" >
+            <label >Razon Social</label>
+        </div>
+        <div class="form-floating mb-3 mt-3 ">
+            <input formControlName="representante_legal" type="text"  class="form-control" placeholder="Representante Legal" >
+            <label >Representante Legal</label>
+        </div>
+        <button  class="btn btn-primary" style="padding: 8px;" type="sumit">Enviar Formulario</button>
+        </form>
+
+    
+</div>

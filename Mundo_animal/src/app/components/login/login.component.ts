@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   opcionSeleccionado: string = '0';
   verSeleccion: string = '';
   roles: string[] = [
+    "Cliente",
     'Veterinaria(empresa)',
     'Veterinario(persona)',
     'Domiciliario',
@@ -54,7 +55,8 @@ export class LoginComponent implements OnInit {
       next: (token) => {
         const tokens = token;
         localStorage.setItem('token', token);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/listProduct']);
+        
       },
       error: (e: HttpErrorResponse) => {
         this._errorService.msjError(e);

@@ -4,7 +4,7 @@ import { User } from "../models/usuarios";
 import jwt from "jsonwebtoken";
 
 export const newUser = async (req: Request, res: Response) => {
-  const { username, password, rol } = req.body;
+  const { username, rol, password } = req.body;
   console.log(req.body);
   // Validamos si el usuario ya existe en la base de datos
   const user = await User.findOne({ where: { username: username } });

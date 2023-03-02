@@ -1,5 +1,5 @@
 import { Product } from "../models/product";
-import { request, Request, response, Response } from "express";
+import {  Request,  Response } from "express";
 import sequelize from "../bd/connection";
 
 export const createProduct = async (req: Request, res: Response) => {
@@ -75,7 +75,6 @@ export const updateProduct = async (req: Request, res: Response) => {
 export const deleteProduct1 = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-
     const product = await Product.findByPk(id);
     if (product) {
       await product.destroy();

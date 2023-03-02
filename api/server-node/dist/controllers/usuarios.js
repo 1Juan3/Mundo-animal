@@ -17,7 +17,7 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const usuarios_1 = require("../models/usuarios");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { username, password, rol } = req.body;
+    const { username, rol, password } = req.body;
     console.log(req.body);
     // Validamos si el usuario ya existe en la base de datos
     const user = yield usuarios_1.User.findOne({ where: { username: username } });

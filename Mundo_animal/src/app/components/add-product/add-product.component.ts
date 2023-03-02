@@ -70,11 +70,11 @@ export class AddProductComponent  implements OnInit{
       this.productService.updateProduct(this.id!, fd).subscribe(() => {
         console.log(fd)
         this.toastr.info(`El producto ${this.product.name} fue actualizado con exito`, 'Producto actualizado');
-        this.router.navigate(['/']);
+        this.router.navigate(['/listProduct']);
       })
     }else{
       this.productService.addProduct(fd).subscribe(() => {
-        this.router.navigate(['/products']);
+        this.router.navigate(['/listProduct']);
       });
 
     }

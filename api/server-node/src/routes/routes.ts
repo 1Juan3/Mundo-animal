@@ -8,6 +8,10 @@ import {
   getProduct,
 } from "../controllers/product";
 import { loginUser, newUser } from "../controllers/usuarios";
+import { createdRecord, getAllRecords, getRecord, deletedRecord } from "../controllers/record_veterinarian";
+import { newForm,deleteForm,getAllForms,getForm } from "../controllers/form_veterinaria";
+import { createdFormDomiciliario,deletedFormDomiciliario,getAllFormsDomiciliario,getFormDomiciliario} from "../controllers/form_domiciliario";
+import { newClient } from "../controllers/client";
 
 const router = Router();
 const storage = multer.diskStorage({
@@ -35,7 +39,27 @@ router.post("/products", upload.single("image"), createProduct);
 router.put("/products/:id", upload.single("image"), updateProduct);
 router.delete("/products/:id", deleteProduct);
 //rutas usuario
-router.post("/register", newUser);
+router.post("/create-users", newUser);
 router.post("/login", loginUser);
+//rurtas para ell form de veterinarios 
 
+router.post("/record", upload.single("hoja_vida"), createdRecord);
+router.get("/records", getAllRecords);
+router.get("/record:id", getRecord)
+router.delete("/record/:id", deletedRecord)
+
+//rutas form veterinaria
+router.post("/formveterinaria", newForm);
+router.get("/formveterinaria/:id", getForm);
+router.get("/formveterinaria", getAllForms);
+router.delete("/formveterinaria/:id", deleteForm)
+///rutas para el form domiciliario 
+
+router.post("/formdomiciliario", upload.single("hoja_vida"), createdFormDomiciliario);
+router.get("/formdomiciliario", getAllFormsDomiciliario);
+router.get("/formdomiciliario:id", getFormDomiciliario)
+router.delete("/formdomiciliario/:id", deletedFormDomiciliario)
+
+/// rutas para el cliente 
+router.post("/register", newClient);
 export default router;
