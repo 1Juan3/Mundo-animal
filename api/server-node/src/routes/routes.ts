@@ -12,7 +12,15 @@ import { createdRecord, getAllRecords, getRecord, deletedRecord } from "../contr
 import { newForm,deleteForm,getAllForms,getForm } from "../controllers/form_veterinaria";
 import { createdFormDomiciliario,deletedFormDomiciliario,getAllFormsDomiciliario,getFormDomiciliario} from "../controllers/form_domiciliario";
 import { newClient } from "../controllers/client";
+import { createAvailability , getAvailabilitys} from "../controllers/availability";
 
+///
+import { newVet,updateProfile } from "../controllers/vets";
+//
+import { newVeteterinarian } from "../controllers/veterinarians";
+import { newDeliverers } from "../controllers/deliverers";
+
+import { newAppointment } from "../controllers/appointment";
 const router = Router();
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -41,7 +49,7 @@ router.delete("/products/:id", deleteProduct);
 //rutas usuario
 router.post("/create-users", newUser);
 router.post("/login", loginUser);
-//rurtas para ell form de veterinarios 
+//rurtas para el form de veterinarios 
 
 router.post("/record", upload.single("hoja_vida"), createdRecord);
 router.get("/records", getAllRecords);
@@ -50,7 +58,6 @@ router.delete("/record/:id", deletedRecord)
 
 //rutas form veterinaria
 router.post("/formveterinaria", newForm);
-router.get("/formveterinaria/:id", getForm);
 router.get("/formveterinaria", getAllForms);
 router.delete("/formveterinaria/:id", deleteForm)
 ///rutas para el form domiciliario 
@@ -62,4 +69,12 @@ router.delete("/formdomiciliario/:id", deletedFormDomiciliario)
 
 /// rutas para el cliente 
 router.post("/register", newClient);
+router.post("/register-vets", newVet)
+router.post("/registervete", newVeteterinarian);
+router.post("/registerdeliverers",newDeliverers);
+//rutas para agregar disponibilidad
+router.post("/availability", createAvailability);
+router.get("/availability" ,getAvailabilitys)
+//rutas para la cita 
+router.post("/appointment", newAppointment);
 export default router;

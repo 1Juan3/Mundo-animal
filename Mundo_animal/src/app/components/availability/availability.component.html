@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2>Crear disponibilidad</h2>
+        <div>
+          <label>Hora de inicio:</label>
+          <input type="time" class="form-control" [(ngModel)]="startTime" required>
+        </div>
+        <div>
+          <label>Hora de fin:</label>
+          <input type="time" class="form-control" [(ngModel)]="endTime" required>
+        </div>
+        <div>
+          <label>Día de la semana:</label>
+          <select class="form-control" [(ngModel)]="opcionSeleccionado" required (change)="capturar()" >
+            <option value="0" disabled>Seleccione un día</option>
+            <option *ngFor="let day of dayOfWeek" >{{day}}</option>
+          </select>
+        </div>
+        <button type="button" (click)="addAvailability()" class="btn btn-primary">Crear disponibilidad</button>
+    </div>
+  </div>
+</div>
+<div class="bd-example">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Dia</th>
+        <th scope="col">Hora Inicio</th>
+        <th scope="col">Hora Final</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let disponibilidad of availability">
+        <th scope="row">{{disponibilidad.id}}</th>
+        <td>{{disponibilidad.dayOfWeek}}</td>
+        <td>{{disponibilidad.startTime}}</td>
+        <td>{{disponibilidad.endTime}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>

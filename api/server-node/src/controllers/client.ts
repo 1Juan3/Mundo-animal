@@ -27,7 +27,7 @@ export const newClient = async (req: Request, res: Response) => {
       phone:phone,
       email:email,
       username:username,
-      password:password
+      password:hashedPassword
     });
     res.json({
       msg: `¡Usuario ${username} creado exitosamente! `,

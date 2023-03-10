@@ -79,6 +79,11 @@ export class AddProductComponent  implements OnInit{
 
     }
   }
+editProduct(productId: number) {
+  const product = this.products.value.find((p: { id: number; }) => p.id === productId);
+  // Abre la modal de edición con los datos del producto
+}
+
 
 getProduct(id: number){
   this.loading=true;

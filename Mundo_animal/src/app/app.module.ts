@@ -21,6 +21,10 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { ViewFormVeterinariasComponent } from './components/view-form-veterinarias/view-form-veterinarias.component';
 import { ViewFormsVeterinariosComponent } from './components/view-forms-veterinarios/view-forms-veterinarios.component';
 import { ViewFormsDomiciliarioComponent } from './components/view-forms-domiciliario/view-forms-domiciliario.component';
+import { AvailabilityComponent } from './components/availability/availability.component';
+import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
+import { AppointmentListComponent } from './components/appointment-list/appointment-list.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,10 @@ import { ViewFormsDomiciliarioComponent } from './components/view-forms-domicili
     ViewFormVeterinariasComponent,
     ViewFormsVeterinariosComponent,
     ViewFormsDomiciliarioComponent,
+    AvailabilityComponent,
+    AppointmentFormComponent,
+    AppointmentListComponent,
+    CarritoComponent,
 
   ],
   imports: [

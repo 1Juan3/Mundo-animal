@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
       next: (token) => {
         const tokens = token;
         localStorage.setItem('token', token);
+        console.log(token)
         this.router.navigate(['/listProduct']);
         
       },

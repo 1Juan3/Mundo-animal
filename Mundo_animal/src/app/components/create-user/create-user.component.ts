@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/interfaces/usuario';
+import { Vet } from 'src/app/interfaces/vet';
 import { ErrorService } from 'src/app/services/error-service.service';
 import { UserService } from 'src/app/services/usuarios.service';
 @Component({
@@ -47,25 +48,62 @@ addUser() {
     return;
   }
 
-  // Creamos el objeto
-  const user: User = {
-    username: this.username,
-    rol: this.verSeleccion,
-    password: this.password
+  switch (this.verSeleccion) {
+    case 'Veterinaria(empresa)':
+      const vet: User = {
+        username: this.username,
+        rol: this.verSeleccion,
+        password: this.password
+      }
+      this._userService.registerVet(vet).subscribe({
+        next: (v) => {
+          this.loading = false;
+          this.toastr.success(`El usuario ${this.username} fue registrado con exito con el rol de ${this.verSeleccion}`, 'Usuario registrado');
+        },
+        error: (e: HttpErrorResponse) => {
+          this.loading = false;
+          this._errorService.msjError(e);
+        }
+      });
+      break;
+    case 'Veterinario(persona)':
+      const vete: User = {
+        username: this.username,
+        rol: this.verSeleccion,
+        password: this.password
+      }
+      this._userService.registerVete(vete).subscribe({
+        next: (v) => {
+          this.loading = false;
+          this.toastr.success(`El usuario ${this.username} fue registrado con exito con el rol de ${this.verSeleccion}`, 'Usuario registrado');
+        },
+        error: (e: HttpErrorResponse) => {
+          this.loading = false;
+          this._errorService.msjError(e);
+        }
+      });
+      break;
+    case 'Domiciliario':
+      const domi: User = {
+        username: this.username,
+        rol: this.verSeleccion,
+        password: this.password
+      }
+      this._userService.registerDeliver(domi).subscribe({
+        next: (v) => {
+          this.loading = false;
+          this.toastr.success(`El usuario ${this.username} fue registrado con exito con el rol de ${this.verSeleccion}`, 'Usuario registrado');
+        },
+        error: (e: HttpErrorResponse) => {
+          this.loading = false;
+          this._errorService.msjError(e);
+        }
+      });
+      break;
+    default:
+      this.toastr.error("no se pudo crear el usuario");
+      break;
   }
-
-  this.loading = true;
-  this._userService.signIn(user).subscribe({
-    next: (v) => {
-      this.loading = false;
-      this.toastr.success(`El usuario ${this.username} fue registrado con exito con el rol de ${this.verSeleccion}`, 'Usuario registrado');
-      
-    },
-    error: (e: HttpErrorResponse) => {
-      this.loading = false;
-      this._errorService.msjError(e);
-    }
-  })
 }
 
 }

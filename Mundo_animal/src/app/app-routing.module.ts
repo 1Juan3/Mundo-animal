@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddProductComponent } from './components/add-product/add-product.component';
+import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
+import { AvailabilityComponent } from './components/availability/availability.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { FormDomiciliarioComponent } from './components/form-domiciliario/form-domiciliario.component';
 import { FormVeterinariaComponent } from './components/form-veterinaria/form-veterinaria.component';
@@ -30,6 +33,9 @@ const routes: Routes = [
   { path:'view-forms-veterinarias', component: ViewFormVeterinariasComponent },
   { path: 'view-forms-veterinarios', component:ViewFormsVeterinariosComponent },
   {path: 'view-forms-domiciliarios', component:ViewFormsDomiciliarioComponent},
+  { path:'addAvailability', component:AvailabilityComponent },
+  { path:'addAppointment', component:AppointmentFormComponent },
+  { path:'cart', component:CarritoComponent },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 

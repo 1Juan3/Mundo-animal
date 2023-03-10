@@ -36,7 +36,7 @@ const newClient = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             phone: phone,
             email: email,
             username: username,
-            password: password
+            password: hashedPassword
         });
         res.json({
             msg: `¡Usuario ${username} creado exitosamente! `,

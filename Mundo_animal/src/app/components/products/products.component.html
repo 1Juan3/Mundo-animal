@@ -5,26 +5,16 @@
     <a href="#">Veterinarios</a>
     <a href="/trabaja-con-nosotros">Trabaja Con Nosotros</a>
     <a href="/login">Iniciar Sesion</a>
-  </section>
-<div class="container mt-5">
-    <div class="card" style="width: 18rem;" *ngFor="let product of products">
-      <img [src]="product.image" class="card-img-top" alt="Producto">
-      <div class="card-body">
-        <h5 class="card-title">{{product.name}}</h5>
-        <p class="card-text">{{product.description}}</p>
-        <a href="#" class="btn btn-primary">Comprar</a>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">{{product.price | currency}}</small>
-      </div>
-    </div>
-    <div class="modal fade" id="modalImagen" tabindex="-1" role="dialog" aria-labelledby="modalImagenLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <img src="https://via.placeholder.com/600x600" class="img-fluid" alt="Imagen ampliada">
+  </section> 
+  <section class="contenedor">
+        <!-- Contenedor de elementos -->
+        <div class="contenedor-items">
+          <div class="item" *ngFor="let product of products">
+              <span class="titulo-item">{{product.name}}</span>
+              <img [src]="product.image" alt="" class="img-item" style="height: 100px;">
+              <span class="descripcion-item">{{product.description}}</span>
+              <span class="precio-item">{{product.price | currency}}</span>
+              <button class="boton-item">Agregar al Carrito</button>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+  </section>
