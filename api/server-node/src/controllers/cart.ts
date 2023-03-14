@@ -1,69 +1,92 @@
 import { Product } from "../models/product";
+import { Cart } from "../models/cart";
 import {  Request,  Response } from "express";
 import sequelize from "../bd/connection";
 
-export const createProduct = async (req: Request, res: Response) => {
+export const addToCart = async (req: Request, res: Response) => {
   try {
-    const { name, description, price, stock,veterinaria_id } = req.body;
-    const paht = req.file?.filename;
-    const image = "http://localhost:3000/uploads/" + paht;
-    const product = await Product.create({
-      name,
-      description,
-      price,
-      stock,
-      image,
-      veterinaria_id,
+    let { name_product,quantity, image, price,  total, sub_total, product_id,client_id} = req.body;
+    sub_total = quantity * price;
+    const [product, created] = await Cart.findOrCreate({
+      where:{ product_id: product_id},
+      defaults:{
+        name_product,
+        quantity,
+        image,
+        price,
+        total,
+        sub_total,
+        product_id,
+        client_id,
+      }
     });
-    res.json(product);
+    if(!created){
+      product.quantity+=quantity;
+      product.sub_total = product.quantity * product.price;
+      await product.save();
+    }res.json(product)
   } catch (err) {
     res.status(500).json({ message: "err.message", err });
   }
 };
 
-export const getAllProducts = async (req: Request, res: Response) => {
+export const getCart = async (req: Request, res: Response) => {
   try {
-    const products = await Product.findAll();
-    res.json(products);
+    const cart = await Cart.findAll();
+    res.json(cart);
+
   } catch (err) {
     res.status(500).json({ msg: "err.message", err });
   }
 };
-export const getProduct = async (req: Request, res: Response) => {
+export const getCart1 = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const product = await Product.findByPk(id);
+  const cart = await Product.findByPk(id);
 
-  if (product) {
-    res.json(product);
+  if (cart) {
+    res.json(cart);
   } else {
     res.status(404).json({
       msg: `No existe un producto con el id ${id}`,
     });
   }
 };
-export const updateProduct = async (req: Request, res: Response) => {
+export const cartAddQuantity = async (req: Request, res: Response) => {
   try {
     console.log("llego peticion");
 
-    const { name, description, price, stock } = req.body;
+    const { quantityValue } = req.body;
     const { id } = req.params;
-    let image;
-    if (req.file) {
-      const path = req.file.filename;
-      console.log(path)
-      image = "http://localhost:3000/uploads/" + path;
+
+    const cart = await Cart.findByPk(id);
+    if (cart) {
+      const updatedCart = await cart.update({
+        quantity: cart.quantity + quantityValue,
+        
+      });
+      res.json(updatedCart);
+    } else {
+      res.status(404).json({ message: "Product not found" });
     }
-    const product = await Product.findByPk(id);
-    if (product) {
-      product.name = name;
-      product.description = description;
-      product.price = price;
-      product.stock = stock;
-      if (image) {
-        product.image = image;
-      }
-      await product.save();
-      res.json(product);
+    
+  } catch (err) {
+    res.status(500).json({ message: "err.message", err });
+  }
+};
+
+export const cartResQuantity = async (req: Request, res: Response) => {
+  try {
+    console.log("llego peticion");
+
+    const { quantityValue } = req.body;
+    const { id } = req.params;
+
+    const cart = await Cart.findByPk(id);
+    if (cart) {
+      const updatedCart = await cart.update({
+        quantity: cart.quantity - quantityValue
+      });
+      res.json(updatedCart);
     } else {
       res.status(404).json({ message: "Product not found" });
     }

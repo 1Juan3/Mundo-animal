@@ -19,8 +19,9 @@ import { newVet,updateProfile } from "../controllers/vets";
 //
 import { newVeteterinarian } from "../controllers/veterinarians";
 import { newDeliverers } from "../controllers/deliverers";
-
 import { newAppointment } from "../controllers/appointment";
+import { addToCart, getCart, cartAddQuantity,cartResQuantity } from "../controllers/cart";
+
 const router = Router();
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -77,4 +78,9 @@ router.post("/availability", createAvailability);
 router.get("/availability" ,getAvailabilitys)
 //rutas para la cita 
 router.post("/appointment", newAppointment);
+///rutas para el cart
+router.post("/addtocart", addToCart)
+router.get("/getCart", getCart)
+router.put("/addQuantity/:id", cartAddQuantity);
+router.put("/resQuantity/:id", cartResQuantity);
 export default router;

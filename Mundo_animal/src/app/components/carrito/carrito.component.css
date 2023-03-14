@@ -1,4 +1,9 @@
 /* seccion carrito */
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .carrito{
     border: 1px solid #666;
     width: 35%;
@@ -65,6 +70,7 @@
 }
 .carrito .carrito-item .btn-eliminar{
     position: absolute;
+    margin-top: 25px;
     right: 15px;
     top: 15px;
     color: #000;

@@ -12,45 +12,54 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteProduct = exports.deleteProduct1 = exports.updateProduct = exports.getProduct = exports.getAllProducts = exports.createProduct = void 0;
+exports.deleteProduct = exports.deleteProduct1 = exports.cartResQuantity = exports.cartAddQuantity = exports.getCart1 = exports.getCart = exports.addToCart = void 0;
 const product_1 = require("../models/product");
+const cart_1 = require("../models/cart");
 const connection_1 = __importDefault(require("../bd/connection"));
-const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+const addToCart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, description, price, stock, veterinaria_id } = req.body;
-        const paht = (_a = req.file) === null || _a === void 0 ? void 0 : _a.filename;
-        const image = "http://localhost:3000/uploads/" + paht;
-        const product = yield product_1.Product.create({
-            name,
-            description,
-            price,
-            stock,
-            image,
-            veterinaria_id,
+        let { name_product, quantity, image, price, total, sub_total, product_id, client_id } = req.body;
+        sub_total = quantity * price;
+        const [product, created] = yield cart_1.Cart.findOrCreate({
+            where: { product_id: product_id },
+            defaults: {
+                name_product,
+                quantity,
+                image,
+                price,
+                total,
+                sub_total,
+                product_id,
+                client_id,
+            }
         });
+        if (!created) {
+            product.quantity += quantity;
+            product.sub_total = product.quantity * product.price;
+            yield product.save();
+        }
         res.json(product);
     }
     catch (err) {
         res.status(500).json({ message: "err.message", err });
     }
 });
-exports.createProduct = createProduct;
-const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.addToCart = addToCart;
+const getCart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const products = yield product_1.Product.findAll();
-        res.json(products);
+        const cart = yield cart_1.Cart.findAll();
+        res.json(cart);
     }
     catch (err) {
         res.status(500).json({ msg: "err.message", err });
     }
 });
-exports.getAllProducts = getAllProducts;
-const getProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getCart = getCart;
+const getCart1 = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const product = yield product_1.Product.findByPk(id);
-    if (product) {
-        res.json(product);
+    const cart = yield product_1.Product.findByPk(id);
+    if (cart) {
+        res.json(cart);
     }
     else {
         res.status(404).json({
@@ -58,29 +67,18 @@ const getProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
 });
-exports.getProduct = getProduct;
-const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getCart1 = getCart1;
+const cartAddQuantity = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log("llego peticion");
-        const { name, description, price, stock } = req.body;
+        const { quantityValue } = req.body;
         const { id } = req.params;
-        let image;
-        if (req.file) {
-            const path = req.file.filename;
-            console.log(path);
-            image = "http://localhost:3000/uploads/" + path;
-        }
-        const product = yield product_1.Product.findByPk(id);
-        if (product) {
-            product.name = name;
-            product.description = description;
-            product.price = price;
-            product.stock = stock;
-            if (image) {
-                product.image = image;
-            }
-            yield product.save();
-            res.json(product);
+        const cart = yield cart_1.Cart.findByPk(id);
+        if (cart) {
+            const updatedCart = yield cart.update({
+                quantity: cart.quantity + quantityValue,
+            });
+            res.json(updatedCart);
         }
         else {
             res.status(404).json({ message: "Product not found" });
@@ -90,7 +88,28 @@ const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(500).json({ message: "err.message", err });
     }
 });
-exports.updateProduct = updateProduct;
+exports.cartAddQuantity = cartAddQuantity;
+const cartResQuantity = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log("llego peticion");
+        const { quantityValue } = req.body;
+        const { id } = req.params;
+        const cart = yield cart_1.Cart.findByPk(id);
+        if (cart) {
+            const updatedCart = yield cart.update({
+                quantity: cart.quantity - quantityValue
+            });
+            res.json(updatedCart);
+        }
+        else {
+            res.status(404).json({ message: "Product not found" });
+        }
+    }
+    catch (err) {
+        res.status(500).json({ message: "err.message", err });
+    }
+});
+exports.cartResQuantity = cartResQuantity;
 const deleteProduct1 = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;

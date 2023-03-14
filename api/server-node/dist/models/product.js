@@ -35,6 +35,10 @@ Product.init({
         type: new sequelize_1.DataTypes.STRING(),
         allowNull: false,
     },
+    veterinaria_id: {
+        type: sequelize_1.DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+    },
 }, {
     tableName: "products",
     sequelize: connection_1.default,

@@ -1,6 +1,6 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../bd/connection";
-
+import { Vets } from "./vets";
 export class Product extends Model {
   public id!: number;
   public name!: string;
@@ -8,6 +8,8 @@ export class Product extends Model {
   public price!: number;
   public stock!: number;
   public image!: string;
+  public veterinaria_id!: number;
+  
 }
 
 Product.init(
@@ -37,9 +39,14 @@ Product.init(
       type: new DataTypes.STRING(),
       allowNull: false,
     },
+    veterinaria_id: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+    },
   },
   {
     tableName: "products",
     sequelize,
   }
 );
+

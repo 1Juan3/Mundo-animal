@@ -18,6 +18,7 @@ export class AddProductComponent  implements OnInit{
   product: Product = new Product();
   selectedFile: File = new File([], '');
   toastr: any;
+  veterinaria_id:number = 1;
   
   constructor(private productService: ProductService,
               private router: Router,
@@ -29,11 +30,16 @@ export class AddProductComponent  implements OnInit{
                   description: ['', Validators.required],
                   price: [null, Validators.required],
                   stock: [null, Validators.required] ,
-                  image:[null],})
+                  image:[null],
+                  veterinaria_id: [null]})
+                  
                   this.id = Number(this.aRouter.snapshot.paramMap.get('id'));
                   console.log(this.id)
                 }
   ngOnInit(): void {
+    this.products.patchValue({
+      veterinaria_id: this.veterinaria_id // asigna el valor de veterinaria_id al campo veterinaria_id del formulario
+    });
     if (this.id !== undefined && this.id !== null && this.id !== 0) {
       this.operacion = 'Editar ';
       this.getProduct(this.id);
@@ -60,6 +66,7 @@ export class AddProductComponent  implements OnInit{
     fd.append('price', this.products.get('price')?.value);
     fd.append('stock', this.products.get('stock')?.value);
     fd.append('image', this.products.get('image')?.value);
+    fd.append('veterinaria_id',this.products.get('veterinaria_id')?.value);
     
     
     
