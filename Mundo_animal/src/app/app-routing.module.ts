@@ -17,8 +17,17 @@ import { ViewFormVeterinariasComponent } from './components/view-form-veterinari
 import { ViewFormsDomiciliarioComponent } from './components/view-forms-domiciliario/view-forms-domiciliario.component';
 import { ViewFormsVeterinariosComponent } from './components/view-forms-veterinarios/view-forms-veterinarios.component';
 
+//guardas
+import { RoleVeterinarioGuardGuard } from './Guards/role-veterinario-guard.guard';
+import { RoleAdminGuardGuard } from './Guards/role-admin-guard.guard';
+import { RoleClienteGuardGuard } from './Guards/role-cliente-guard.guard';
+import { RoleSesionGuardGuard } from './Guards/sesion-guard.guard';
+import { RoleVeterinariaGuardGuard } from './Guards/role-veterinaria-guard.guard';
+import { IndexComponent } from './components/index/index.component';
+import { ViewRemisionesComponent } from './components/view-remisiones/view-remisiones.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path:'index', component:IndexComponent },
   { path:'signIn', component:SignInComponent},
   { path: 'login', component:LoginComponent },
   { path: 'trabaja-con-nosotros', component:TrabajaCoNosotrosComponent},
@@ -33,9 +42,10 @@ const routes: Routes = [
   { path:'view-forms-veterinarias', component: ViewFormVeterinariasComponent },
   { path: 'view-forms-veterinarios', component:ViewFormsVeterinariosComponent },
   {path: 'view-forms-domiciliarios', component:ViewFormsDomiciliarioComponent},
-  { path:'addAvailability', component:AvailabilityComponent },
+  { path:'addAvailability', component:AvailabilityComponent, canActivate: [RoleVeterinarioGuardGuard] },
   { path:'addAppointment', component:AppointmentFormComponent },
-  { path:'cart', component:CarritoComponent },
+  {path: 'view-remision', component:ViewRemisionesComponent},
+  { path:'cart', component:CarritoComponent, canActivate:[RoleSesionGuardGuard] },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 

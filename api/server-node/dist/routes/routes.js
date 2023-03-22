@@ -18,7 +18,8 @@ const vets_1 = require("../controllers/vets");
 const veterinarians_1 = require("../controllers/veterinarians");
 const deliverers_1 = require("../controllers/deliverers");
 const appointment_1 = require("../controllers/appointment");
-const cart_1 = require("../controllers/cart");
+//rutas para el pedido o remision
+const remisiones_1 = require("../controllers/remisiones");
 const router = (0, express_1.Router)();
 const storage = multer_1.default.diskStorage({
     destination: (req, file, cb) => {
@@ -68,9 +69,7 @@ router.post("/availability", availability_1.createAvailability);
 router.get("/availability", availability_1.getAvailabilitys);
 //rutas para la cita 
 router.post("/appointment", appointment_1.newAppointment);
-///rutas para el cart
-router.post("/addtocart", cart_1.addToCart);
-router.get("/getCart", cart_1.getCart);
-router.put("/addQuantity/:id", cart_1.cartAddQuantity);
-router.put("/resQuantity/:id", cart_1.cartResQuantity);
+//rutas para las remisiones
+router.post('/sendRemision', remisiones_1.newRemision);
+router.get('/getRemisiones', remisiones_1.getRemisiones);
 exports.default = router;

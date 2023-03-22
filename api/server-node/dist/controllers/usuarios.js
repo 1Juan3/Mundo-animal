@@ -18,7 +18,7 @@ const usuarios_1 = require("../models/usuarios");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, rol, password } = req.body;
-    console.log(req.body);
+    const id = req.params.id;
     // Validamos si el usuario ya existe en la base de datos
     const user = yield usuarios_1.User.findOne({ where: { username: username } });
     if (user) {
@@ -30,6 +30,7 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Guardarmos usuario en la base de datos
         yield usuarios_1.User.create({
+            id: id,
             username: username,
             rol: rol,
             password: hashedPassword,

@@ -14,7 +14,7 @@
               <img [src]="product.image" alt="" class="img-item" style="height: 100px;">
               <span class="descripcion-item">{{product.description}}</span>
               <span class="precio-item">{{product.price | currency}}</span>
-              <button class="boton-item" (click)="product.id !== undefined   && addToCart(product.id)">Agregar al Carrito</button>
+              <button class="boton-item" (click)="addToCart(product)">Agregar al Carrito</button>
           </div>
         </div>
   </section>

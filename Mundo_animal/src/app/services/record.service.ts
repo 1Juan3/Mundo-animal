@@ -7,7 +7,7 @@ import { Record } from '../interfaces/record';
 })
 export class RecordService {
   private apiUrl = 'http://localhost:3000/api/records';
-
+  private apiUrladd = 'http://localhost:3000/api/record';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -23,7 +23,7 @@ export class RecordService {
     return this.http.get<Record>(url);
   }
   addRecord(formData: FormData): Observable<Record> {
-    return this.http.post<Record>(`${this.apiUrl}`, formData);
+    return this.http.post<Record>(`${this.apiUrladd}`, formData);
   }
 
 

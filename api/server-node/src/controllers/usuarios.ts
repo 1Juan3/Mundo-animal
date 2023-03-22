@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 export const newUser = async (req: Request, res: Response) => {
   const { username, rol, password } = req.body;
-  console.log(req.body);
+  const id = req.params.id;
   // Validamos si el usuario ya existe en la base de datos
   const user = await User.findOne({ where: { username: username } });
 
@@ -20,6 +20,7 @@ export const newUser = async (req: Request, res: Response) => {
   try {
     // Guardarmos usuario en la base de datos
     await User.create({
+      id:id,
       username: username,
       rol: rol,
       password: hashedPassword,
@@ -41,6 +42,7 @@ export const loginUser = async (req: Request, res: Response) => {
   // Validamos si el usuario existe en la base de datos
   const user: any = await User.findOne({ where: { username: username } });
   const roles: any = await User.findOne({ where: { rol: rol } });
+  
 
   if (!roles) {
     return res.status(400).json({

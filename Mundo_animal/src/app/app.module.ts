@@ -25,6 +25,8 @@ import { AvailabilityComponent } from './components/availability/availability.co
 import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
 import { AppointmentListComponent } from './components/appointment-list/appointment-list.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { IndexComponent } from './components/index/index.component';
+import { ViewRemisionesComponent } from './components/view-remisiones/view-remisiones.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { CarritoComponent } from './components/carrito/carrito.component';
     AppointmentFormComponent,
     AppointmentListComponent,
     CarritoComponent,
+    IndexComponent,
+    ViewRemisionesComponent,
 
   ],
   imports: [

@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/interfaces/usuario';
 import { ErrorService } from 'src/app/services/error-service.service';
 import { UserService } from 'src/app/services/usuarios.service';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService,
     private _userService: UserService,
     private router: Router,
-    private _errorService: ErrorService
+    private _errorService: ErrorService,
+    private _CookieService: CookieService
   ) {}
 
   capturar() {
@@ -55,7 +57,7 @@ export class LoginComponent implements OnInit {
       next: (token) => {
         const tokens = token;
         localStorage.setItem('token', token);
-        console.log(token)
+        this._CookieService.set('token',token);
         this.router.navigate(['/listProduct']);
         
       },

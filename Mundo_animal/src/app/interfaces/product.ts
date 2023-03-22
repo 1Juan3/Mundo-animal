@@ -6,4 +6,5 @@ export class Product {
   stock?: number;
   image?: string;
   veterinaria_id?: number;
+  quantity?: number;
 }

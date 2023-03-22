@@ -1,34 +1,35 @@
-    <section>
-      <div class="carrito" id="carrito">
-        <div class="header-carrito">
-            <h2>Tu Carrito</h2>
-        </div>
-
-        <div class="carrito-items" *ngFor="let item of itemCard">
-            <div class="carrito-item">
-                <img [src]="item.image" width="80px" alt="">
-                <div class="carrito-item-detalles">
-                    <span class="carrito-item-titulo">{{item.name_product}}</span>
-                    <div class="selector-cantidad">
-                        <i class="fas fa-minus restar-cantidad" (click)="resItem(item.id)" ></i>
-                        <input type="text" value="{{item.quantity}}" class="carrito-item-cantidad" disabled>
-                        <i class="fas fa-plus sumar-cantidad" (click)="addItem(item.id)"></i>
-                    </div>
-                    <span class="carrito-item-precio">{{item.sub_total }}</span>
-                </div>
-               <span class="btn-eliminar">
-                    <i class="fas fa-trash-alt"></i>
-               </span>
+<section>
+    <div class="carrito" id="carrito">
+      <div class="header-carrito">
+        <h2>Tu Carrito</h2>
+      </div>
+  
+      <div class="carrito-items" *ngFor="let item of cartItems">
+        <div class="carrito-item">
+          <img [src]="item.image" width="80px" alt="">
+          <div class="carrito-item-detalles">
+            <span class="carrito-item-titulo">{{item.name}}</span>
+            <div class="selector-cantidad">
+              <i class="fas fa-minus restar-cantidad" (click)="resCart(item)"></i>
+              <input type="text" value="{{item.quantity}}" class="carrito-item-cantidad" disabled>
+              <i class="fas fa-plus sumar-cantidad" (click)="sumCart(item)"></i>
             </div>
+            <span *ngIf="item.sub_total !== undefined" class="carrito-item-precio">{{item.sub_total}}</span>
+          </div>
+          <span class="btn-eliminar" (click)="removeFromCart(item)">
+            <i class="fas fa-trash-alt"></i>
+          </span>
         </div>
-        <div class="carrito-total">
-            <div class="fila">
-                <strong>Tu Total</strong>
-                <span class="carrito-precio-total">
-                    {{total}}
-                </span>
-            </div>
-            <button class="btn-pagar">Pagar <i class="fa-solid fa-bag-shopping"></i> </button>
+      </div>
+  
+      <div class="carrito-total" >
+        <div class="fila">
+          <strong>total</strong>
+          <span class="carrito-precio-total">{{total}}</span>
         </div>
+        <button class="btn-pagar" (click)="newRemision()">Realizar Pedido<i class="fa-solid fa-bag-shopping"></i> </button>
+      </div>
     </div>
-    </section>
+  </section>
+  
+
